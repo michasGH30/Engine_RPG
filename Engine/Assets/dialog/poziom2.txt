@@ -1,0 +1,60 @@
+Poziom 2
+Witaj moj towarzyszu!
+Oto twoje statystyki:
+Poziom 2 jest pierwsza przygoda
+Wiec zaczynajmy
+Budzisz sie w nieznanym domu w nieznanym lozku
+Bola cie plecy od twardego lozka
+Probujesz przypomniec sobie poprzedni dzien
+Jak kazdego dnia wracales z pracy do domu
+I tuz po wyjsciu ze sklepu po zakupach film sie urywa
+Do domu wchodzi staruszek z siwa broda
+A ty wtedy
+TY: Co ja tu robie?!!!
+ST: We we tak nie agresywnie
+TY: Przepraszam
+ST: Zostales tutaj odrodzony po smierci w tamtym swiecie
+TY: WTF!!!??? ja umarlem, jak ?
+ST: Natychmiast przymknij jadaczke albo cos ci zrobie
+TY: Przepraszam jeszcze raz
+ST: O twojej smierci nic mi nie wiadomo
+TY: I co ja mam teraz poczac?
+ST: A bo ja wiem, ja jestem tu tylko poczatkowym NPC
+TY: NANI!!???
+ST: (Glosne charkniecie)
+TY: sr mate
+ST: Chodz wyjdziemy na dwor
+Wychodzicie
+Widzisz kamienne drogi, ludzi na straganach, prawie zostajesz rozjechany przez woz
+ST: Tu odbywa sie rejestracja nowych uzytkownikow
+TY: Co mam zrobic ? (cicho) WTF? Co ja tu robie?
+ST: Oddaje pod opieke recepcji
+REC: Witam cie nowy uzytkowniku
+TY: eeee Witam
+REC: Chodz prosze za mna zaraz odbedzie sie rejestracja
+Idziesz i widzisz duza kule (that's what she said)
+REC: Wloz do niej reke
+Wkladasz reke i po chwili kula wypluwa kartke, pogladasz na nia i widzisz
+Imie:
+HP:
+Sila:
+Charyzma: UNLIMITED
+TY: I jak wypadlem
+REC: (cicho) XD
+REC: Uogolniajac srednie statystyki
+TY: No i co teraz
+REC: Musisz wybrac klase postaci, ktora bedziesz wykonywal
+TY: YHM Ciezko zdecydowac, moge prosic jakis przyklad
+REC: Z taki statami polecilabym ci zostanie kupcem, ale jak nalegasz
+TY: [Znudzona mina]
+REC: Pomyslmy, biorac pod uwage brak wyrozniajacyh sie cech, to mozesz byc kim tylko zechcesz,
+wybierz to co chcialbys robic
+TY: (cicho) W sumie jak moge byc kazdym to
+REC: HM?
+TY: Bede poszukiwaczem przygod
+REC: Okej, aby nauczyc sie jakiejkolwiek umiejetnosci musisz znalesc osobe, ktora cie jej nauczy, 
+nastepnie na karcie pojawi sie opcja nauki
+TY: Brzmi rozsadnie i interesujaco
+REC: Ode mnie to koniec, dziekuje bardzo za rejestracje
+TY: Rowniez dziekuje
+Odchodzisz do gospody udac sie na spoczynek

@@ -1,0 +1,18 @@
+Poziom 1
+Witaj moj towarzyszu!
+Oto twoje statystyki:
+Poziom 1 jest samouczkiem,
+w ktorym nauczysz sie walki
+(co z tego, ze nie bedziesz mial na nia zadnego wplywu xD)
+Nastepnym krokiem jest prosta opcja dialogowa
+Spotykasz nieprzyjaciela co robisz:
+1.Walisz go po mordzie (jest mozliwosc uniku i kontrataku)
+2.Omijasz go duzym lukiem(jest mozliwosc poscigu i dopadniecia)
+3.Podkradasz sie i bierzesz go od tylu(jest mozliwosc wykrycia i pobicia)
+4.Podchodzisz i nawalacie sie wyzwiskami, az ktorys nie przestanie(polecam te opcje)
+Przeciwnik wykonal unik i masz 0 HP
+Przeciwnik jest predkonogi i dostajesz bule na ryj
+Przeciwnik cie wykrywa, poniewaz twoje umiejetnosci skradania sa na poziomie -1
+Przeciwnik poddaje sie slyszac twoje disy, poniewaz posiadasz charyzme na poziomie unlimited
+I tak oto zakonczyl sie pierwszy etap naszej przygody
+

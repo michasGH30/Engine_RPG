@@ -1,0 +1,70 @@
+Poziom 6
+Witaj towarzyszu
+Oto twoje statystyki:
+Budzisz sie po tym ciezkim poprzednim dniu
+TY: E jak teraz moge uzywac zaklec to bedzie pestka
+Dobra idziem po zadanie, bo trzeba wbijac lvl
+(WYCHODZISZ)
+Podchodzisz do tablicy z ogloszeniami i rozgladasz sie za zadaniem
+Po chwili poszukiwan widzisz odmienne zlecenie
+"MISJA EKSPLORACYJNA":
+Odwiedz pobliska jaskinie oraz pokonaj potwory, jezeli jakies beda
+(Wszystkie skarby sa twoja nagroda)
+EXP: 3 lvl
+NAGDRODA: jak wyzej
+TY: No niby nie ma ustalonej nagrody, ale exp to exp
+TY: Biore
+REC: Prosze wiec udac sie na miejsce i wykonac zadanie
+(WYCHODZISZ)
+TY: To chyba tu, wchodze
+Masz przed soba dwie drogi (prawo/lewo)[wpisz p lub l]
+UPS to slepy zaulek
+TY: No to jest chyba koniec, bo tu jest koncowa komnata
+TY: Poza tym to i tak nikogo tu nie bylo, dziwne
+Co zrobisz:
+1. Krzykniesz glosno, aby sprawdzic czy ktos tu jest
+2. Krzyczysz i przeszukujesz
+3. Wywalone ide se
+Krzyczysz i nic nie slyszysz, wiec wychodzisz
+Krzyczysz, czujesz sie zmeczony, przeszukujesz komnate, 
+znajdujesz fajny mieczyk i zwoj
+(DODANO DO EKWIPUNKU MIECZ I ZWOJ BITEWNY)
+Wychodzisz
+Wracasz znow zmeczony do miasta
+Gdy znow widzisz jakas dziwna sylwetke
+TY: To jakies deja vu czy jak ?
+Dziwna sylwetka podchodzi do ciebie i zauwazasz opaske na ramieniu
+TY:(cicho) Echh kolejny
+DS: Hejo jak tam sie miewamy ?
+TY: No troszku zmeczony jestem
+DS: A to fajnie, czyli nie bedziesz sie stawiac jak cie bede zabijal ???
+TY: Ale po co ta przemoc, moze sie dogadamy?
+DS: Zalezy co masz do zaoferowania 
+Co zrobisz:
+Walka ahoj
+Mam cos fajnego z jakini
+Mam troche zlotych monet
+EE w sumie to nic
+Ty fajtlapo przeciez jestes zmeczony, twoj cios nie mial szans trafic
+DS: Ha taki z ciebie chojrak
+TY: Dobra to bylo nierozsadne, ale poczekaj plz
+TY: Mam taki fajny mieczyk i zwoj
+DS: OOO jaki fajniusi daj zobaczyc
+TY: Ale jak ci go dam, to mnie zostawisz
+DS: Nie wykluczone
+(UTRACONO MIECZ)
+DS: Ojojojoj jaki fajniusi
+Ziomus jest tak zajety mieczem, ze otwierasz w tym czasie zwoj i go pokonujesz
+(UTRACONO ZWOJ)
+DS: UAAUAUAUUA
+TY: xD, widzisz nie warto byc chciwym
+DS: NIEEEEEEEE
+DS: Zlote monety mnie nie interesuja, mam ich az nadmiar
+TY: EE moze cos jeszcze mam w torbie, ale poczekaj plz
+Rzucasz monetami w twarz i wbijasz miecz w przeciwnika
+DS: UAAUAUAUUA
+DS: HMMM coz jak nie masz nic cennego to zegnaj poszukiwaczu
+TY: EE moze cos jeszcze mam w torbie, ale poczekaj plz
+Zabierasz opaske i kontynuujesz powrot
+Wracajac znow wszyscy ci wiwatuja
+Idziesz do gospody i zasypiasz glebokim snem

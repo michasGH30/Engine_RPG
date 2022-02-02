@@ -1,0 +1,78 @@
+﻿Poziom 4
+Witaj towarzyszu
+Oto twoje statystyki:
+Budzisz sie po tej dziwnej przygodzie
+Lecz twoim oczom ukazuje sie brak jakichkolwiek zaklec
+Jestes zdziwiony, poniewaz widziales wyraznie, ze po wgraniu bedziesz mial opcje wyboru jednego z 3
+poteznych zaklec, ktorych nie da sie nauczyc w tym swiecie
+TY: Coz w sumie to ziomus mowil, ze moze byc cos nie tak, wiec szkoda
+Wstajesz i idziesz do gildi z zamiarem questa
+Wchodzisz i zmierzasz do tablicy ogloszen
+Od razu zauwazasz zlecenie na ubicie smoka, ale jest od 15 lvl a twoj to:
+TY: Szkoda, a tyle expa by bylo ech
+Szukasz i szukasz zadan z niskim lvl
+I po dluzszych poszukiwaniach widzisz
+"Zabij stado wilkow za miastem"
+Lvl:Kazdy
+EXP:Duzo
+Nagroda:Tez duzo
+TY: Eee przepraszam pani recepcjonistko
+REC: Hmmm?
+TY: A to zadanie to nie jakis fejk?
+REC: Nie, takie informacje podaje sie,
+gdy klient chce sie dogadac z wykonawca w sprawie nagody i doswiadczenia
+Takie zadania sa najlepsze dla poczatkujacych, poniewaz mozna zgarnac duzo EXP'a
+malym kosztem
+TY:(cicho)Nie wiem jak dobry jest ten turbo program, ale na pewno ustala racjonalne zasady
+REC: Hmmm?
+TY: A nic, nie wazne, biore to zlecenie
+REC: Dobre prosze wiec wziac to ogloszenie i pojsc
+na umowione miejsce
+(WYCHODZISZ)
+Idziesz do klienta i dostajesz informacje:
+CEL: Zabic stado wilkow w ilosci 5 sztuk
+EXP: 2 Lvl
+Nagroda: 100 zlotych monet
+TY: A w sumie to po co sa te monety
+Klient: Bedziesz mogl za nie kupic ekwipunek, ale to w nowszej wersji
+TY: Aha, (cicho) Ale jak to nowszej wersji?????
+Spotykasz stado
+(WALKA)
+TY: EJJJJJ czekaj co to bylo, czemu moglem wybrac uzycie czaru, a nic sie nie dzialo ???
+TY:Dobra nie wazne
+Wracasz po nagorde
+KL:Prosze to twoja nagorda
+(SIUP)
+TY: Nie czuje roznicy
+Wracasz do gospody i znow zasypiasz glebokim snem
+(BZZZZZTZZZTZ)
+TY: Co znowu!!!!!
+Slyszysz mily metaliczny glos
+MG: Witaj
+TY: No czesc, cos za jeden
+MG: Jam jest Wielmozny program
+TY: (ZDZIWIONA MINA)
+WP: Wybacz za te takie, a nie inne twe przyjecie
+TY: No dobra, ale co chodzilo z ta walka i zakleciami
+WP: A nie chcesz sie dowiedziec czemu tu jestes
+TY: Aaaaa i tak bys nie znal odpowiedzi
+WP: Ty pacz no zgadl
+TY: Wiedzialem
+WP: Ale kontynuujac, przepraszam za te okropne slowa tego nowego
+Wcale nie wykrylem w tobie wirusa, po prostu ten twoj poziom charyzmy
+TY: Nieskonczonosc
+(DZIWNE JEKI)
+TY: O co chodzi??
+WP: Wybacz na sama mysl o tym mnie skreca
+TY: AAAaaa spoko
+WP: No wiec ten tego
+(KRZYK) To co wczoraj zrobiles z tym wgrywaniem bylo bardzo nieodpowiedzialne
+Ale bylo bardzo zabawnym widziec te zdziwiona mine nowego xD
+TY: Polecam sie na przyszlosc
+WP: Sluchaj przerobilem dla ciebie te modyfikacje i raczej powinna dzialac
+TY: Powinna
+WP: No wiesz moga wystapic(chrzaknienie)jakies komplikacje(chrzaknienie)i potrzebne moze byc pare walk,
+aby sie (chrzaknienie) wyregulowac
+TY: Echhh lepsze to niz nic, dzieki :)
+WP: Juz cie posylam z powrotem i polecam sie na przyszlosc
+Wracasz i znow zasypiasz glebokim snem

@@ -1,0 +1,26 @@
+Witaj towarzyszu!
+Podaj swoje imie:
+Wybierz slot na save (1-3)
+Witaj ponownie juz po formalnosciach
+Zaczniemy tu przygode z moja prosta gra
+Gra bedzie uzywac 3 zmiennych:
+LEVEL
+HP
+SILA
+Wraz ze wzrostem lvl twoje HP i Sila beda sie zwiekszac
+HP bedzie oznaczalo zasob punktow zycia w walce
+(tak bedzie tu walka xD)
+Od sily beda zalezaly obrazenia w walce
+Ilosc sily bedzie oznaczala minimalne obrazenia
+Maksymalna iloscia obrazen beda obrazenia ze wzoru Sila*2+Sila
+Czyli majac 10 sily bedziesz mogl zadac
+Od 10 do 30 obrazen
+Bedzie to pseudolosowe(pozdro dla informatykow)
+Wiec jak nie uda ci sie przejsc poziomu sprobuj ponownie
+Nie mam na to wplywu
+Tak samo bedzie z levelem
+Bedzie on liczba calkowita
+Moze wiec byc go 1 albo 2
+Po ukonczeniu lvl bedzie przyznawana losowa ilosc lvl 
+W zakresie od 0 do 2 lvl
+Zycze powodzenia i milej zabawy

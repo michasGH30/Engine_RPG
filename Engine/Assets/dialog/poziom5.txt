@@ -1,0 +1,62 @@
+Poziom 5
+Witaj towarzyszu
+Oto twoje statystyki:
+Budzisz sie rano i od razu pojawiaja sie na twoim identyfikatorze dziwne znaczki
+TY: No w sumie, to tych zaklec nie da sie nauczyc w tym wszechswiecie, wiec nic dziwnego, ze 
+nie maja normalnych nazw
+TY: No coz to na chybil trafil
+(KLIK)
+TY: Dobra idzmy po zlecenie
+(WYCHODZISZ)
+TY: Dzien dobry
+REC: Dzien dobry
+Podchodzisz do tablicy
+Od razu rzuca ci sie w oczy duza kartka z ostrzerzeniem
+UWAGA GDY TYLKO ZOBACZYSZ TEN SYMBOL UCIEKAJ
+I narysowany jest dziwny znak
+PODPISANO: Wielmozny P.
+TY: Hmmm skoro wystawil to program to musi byc raczej wazne, ale dobra szukam zadania
+TY: (Po dluzszej chwili) O tu widze zadanie na moj lvl
+ZADANIE: Pokonaj 2 orkow z lasu
+EXP: 2 Lvl
+Nagroda: 200 zl monet
+TY: Biore
+REC: Dobrze jako, ze dytyczne sa od razu ustalone prosze po prostu udac sie na miejsce questa
+TY: Dobrze
+(WYCHODZISZ)
+TY: O to chyba te dwa orki do pokonania lecimy
+(WALKA)
+TY: Ej zaraz znow moglem uzyc zaklecia, ale nic ono nie dzialalo, bez sensu
+(WRACASZ)
+Jestes zmeczony i ledwo slaniasz sie na nogach
+Gdy nagle widzisz duza sylwetke w oddali, lecz jestes zbyt zmeczony aby myslec i byc przestraszonym
+Idziesz dalej i ta duza sylwetka nagle zagradza ci droge
+Widzisz na jej ramienu znak, ktory widziales na ostrzezeniu
+(PANIKA)
+Panikujesz, ale nie masz dosc sily by uciekac, wiec moze wezmiesz go podstepem
+Duza sylwetka podbiega do ciebie
+TY: Czesc kim jestes
+DS:(CHARKNIECIE)
+1. Sluchaj nie wiem kim jestes, ani o co ci chodzi, ale spadaj bo cie pokiereszuje
+2. Czesc mam troche zlota moze chcesz
+3. Ej sluchaj tu niedaleko maja swietny bar, moze postawic ci cos
+4. Nie chce ci nic zrobic, wiec moze rozejdziemy sie w spokoju
+Nie wazne jaka opcje bys wybral i tak on nie jest kontaktowy
+(WALKA)
+Padasz na ziemie i nie masz juz zadnych sil
+TY: To bez sensu, gdybym mogl uzywac zaklec
+Duza sylwetka bierze zamach i...
+Znikad leci w ciebie swietlisty promien, stajesz w pelni zregenerowany
+(WALKA)
+TY: WOW udalo mi sie, nareszcie moge uzywac zaklec, zabiore opaske, to moze cos dostane
+Wracasz do miasta i wymachujesz opaska
+Wszyscy ci wiwatuja
+Idziesz do gildi odebrac nagrode, ale za opaske nic nie dostajesz
+Idziesz do gospody
+Zasypiasz glebokim snem
+WP: Wybacz, ze tak dlugo to trwalo
+TY: (KRZYK) Prawie umarlem
+WP: SR, ale dosc dlugo nie mogle sie wpasowac
+TY: Dobra niech ci bedzie, dzieki za wszystko
+WP: Polecam sie na przyszlosc
+Zasypiasz glebokim snem
