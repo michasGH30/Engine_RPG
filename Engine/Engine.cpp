@@ -1251,13 +1251,6 @@ void pierwszy(Tilemap* t, Player* p)
     t->loadFromfile("Assets/m1.txt",0);
     t->loadFromfile("Assets/m1_coll.txt",1);
 
-    SDL_Rect wall, w;
-
-    wall.x = wall.y = 500;
-    wall.w = wall.h = 100;
-
-    w.x = w.y = w.h = w.w = 1;
-
     NPC* npc = new Start_men(1000, 250);
 
     Animation a(1.5f, 's');
@@ -1279,24 +1272,28 @@ void pierwszy(Tilemap* t, Player* p)
 
         }
 
-        if (checkCollision(p->Collider, wall) == true)
+        for (int i = 0; i < 40; i++)
         {
-            b.start();
-            a.start();
+            for (int j = 0; j < 24; j++)
+            {
+                if (t->objects[i][j] != 0 && t->objects[i][j] != 6)
+                    p->move(t->collider[i][j]);
+                else if (t->objects[i][j] == 6 && checkCollision(p->Collider, t->collider[i][j]))
+                {
+                    a.start();
+                    b.start();
+                    p->Collider.x -= 32;
+                }
+            }
         }
+
+        p->move(npc->Collider);
 
         b.check();
         b.anim(npc);
 
         a.check();
         a.anim(p);
-
-        p->move(w);
-
-        p->move(t->collider[0][0]);
-        p->move(t->collider[1][0]);
-
-        p->move(npc->Collider);
 
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
