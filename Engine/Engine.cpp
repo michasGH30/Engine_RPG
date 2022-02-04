@@ -1234,6 +1234,45 @@ Button::~Button()
     mouseuot.free();
 }
 
+Eq::Eq(Player *p)
+{
+    show = false;
+    if (!eq.loadFromFile("Assets/UIEQ.png"))
+        printf("EQ grafika nie dzia³a");
+
+    nickname.loadFromRenderedText(p->nick,white);
+}
+
+Eq::~Eq()
+{
+    eq.free();
+}
+
+void Eq::draw()
+{
+    if (show)
+    {
+        eq.render(0, 0);
+        nickname.render(10, 10);
+    }
+}
+
+void Eq::check_show(SDL_Event e)
+{
+  
+    if (e.type == SDL_KEYDOWN)
+    {
+        if (e.key.keysym.sym == SDLK_e)
+        {
+            if (show)
+                show = false;
+            else if (!show)
+                show = true;
+        }
+    }
+        
+}
+
 void pierwszy(Tilemap* t, Player* p)
 {
     SDL_Event e;
@@ -1256,6 +1295,8 @@ void pierwszy(Tilemap* t, Player* p)
     Animation a(1.5f, 's');
     Animation b(1.0f, 'w');
 
+    Eq eq(p);
+
     while (run)
     {
         while (SDL_PollEvent(&e) != 0)
@@ -1269,6 +1310,8 @@ void pierwszy(Tilemap* t, Player* p)
             p->handleEvents(e);
 
             xd.next_page(e);
+
+            eq.check_show(e);
 
         }
 
@@ -1307,6 +1350,8 @@ void pierwszy(Tilemap* t, Player* p)
         npc->render();
 
         xd.draw();
+
+        eq.draw();
 
         SDL_RenderPresent(gRenderer);
 
@@ -1907,3 +1952,5 @@ void about_menu(Tilemap* t, Player* p)
 
     background.free();
 }
+
+

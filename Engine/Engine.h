@@ -232,6 +232,18 @@ private:
 
 };
 
+class Eq
+{
+    Texture eq;
+    Texture nickname;
+    bool show;
+public:
+    Eq(Player *p);
+    void draw();
+    void check_show(SDL_Event e);
+    ~Eq();
+};
+
 bool checkCollision(SDL_Rect& a, SDL_Rect& b);
 bool init();
 void close(Tilemap* t, Player* p);
