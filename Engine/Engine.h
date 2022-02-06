@@ -98,11 +98,13 @@ public:
 
     Texture player_texture;
 
-    int frame, lastx, lasty, velocity, mapa;
+    int frame, lastx, lasty, velocity, map;
+
+    int health, strenght;
 
     bool ismoving, keyboard_active;
 
-    std::string nick, id, zapis;
+    std::string nick, id, save;
 
     Player(int pozx, int pozy);
 
@@ -169,9 +171,9 @@ class Dialog
     std::string texts[100];
     Texture text;
     int i;
-    int strona, max_stron;
+    int page, max_pages;
     int pixels[5];
-    Timer nastepna;
+    Timer next;
     bool view;
     bool to_hide;
 public:
@@ -236,6 +238,8 @@ class Eq
 {
     Texture eq;
     Texture nickname;
+    Texture hp;
+    Texture power;
     bool show;
 public:
     Eq(Player *p);
@@ -249,7 +253,7 @@ bool init();
 void close(Tilemap* t, Player* p);
 bool checkCollision(SDL_Rect& a, SDL_Rect& b);
 int loadMedia(Tilemap* t);
-void pierwszy(Tilemap* t, Player* p);
+void first(Tilemap* t, Player* p);
 void menu(Tilemap* t, Player* p);
 void play_menu(Tilemap* t, Player* p);
 void new_game_menu(Tilemap* t, Player* p);

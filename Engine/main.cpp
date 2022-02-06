@@ -25,15 +25,14 @@ int main(int argc, char* argv[])
                 close(&tilemap, &player);
                 exit(0);
             }
-            switch (player.mapa)
+            switch (player.map)
             {
             case 1:
-                pierwszy(&tilemap, &player);
+                first(&tilemap, &player);
                 break;
             default:
                 close(&tilemap, &player);
             }
-            //}*/
             
         }
     }

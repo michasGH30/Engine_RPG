@@ -134,8 +134,6 @@ int loadMedia(Tilemap* t)
 
     gFont = TTF_OpenFont("Assets/Fonts/DroidSansMono.ttf", 28);
 
-    printf("FONT IS LOADING\n");
-
     if (gFont == NULL)
     {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search font file. Please reinstall game :)", NULL);
@@ -143,11 +141,10 @@ int loadMedia(Tilemap* t)
         success = 0;
     }
 
-    printf("TILEMAP IS LOADING\n");
-
     if (t->load() == false)
     {
         success = 0;
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search tilemap file. Please reinstall game :)", NULL);
         printf("Failed to load tilemap\n");
     }
 
@@ -416,6 +413,7 @@ bool Tilemap::loadFromfile(std::string path, int l)
     if (!mapa.good())
     {
         printf("Something wrong with map level isn't working");
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search map level file. Please reinstall game :)", NULL);
         loaded = false;
     }
     else
@@ -457,8 +455,8 @@ Player::Player(int pozx, int pozy)
     Collider.y = pozy;
     nick = "NICKNAME";
     id = "0";
-    mapa = 1;
-    zapis = "0";
+    map = 1;
+    save = "0";
     keyboard_active = true;
 }
 
@@ -692,13 +690,13 @@ Player::~Player()
 {
     player_texture.free();
 
-    if (zapis != "0")
+    if (save != "0")
     {
         std::ofstream plik;
 
-        plik.open("Assets/Saves/" + zapis + ".txt");
+        plik.open("Assets/Saves/" + save + ".txt");
 
-        plik << nick << std::endl << id;
+        plik << nick << std::endl << id << std::endl<<health << std::endl << strenght;
     }
 
 }
@@ -788,8 +786,8 @@ bool Start_men::load()
     //mandar.png
     if (npc_texture.loadFromFile("Assets/oldman/oldman.png") == false)
     {
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search NPC texture file. Please reinstall game :)", NULL);
         printf("Failed to load old man texture\n");
-
         return false;
     }
     else
@@ -949,8 +947,8 @@ void Animation::anim(Player* player)
 
 Dialog::Dialog(std::string path)
 {
-    nastepna.set_seconds(5.0f);
-    strona = 0;
+    next.set_seconds(5.0f);
+    page = 0;
     back.loadFromFile("Assets/Gui/dialog.png");
     view = false;
     to_hide = false;
@@ -959,6 +957,7 @@ Dialog::Dialog(std::string path)
     plik.open("Assets/dialog/" + path, std::ios::in);
     if (!plik.good())
     {
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search dialog file. Please reinstall game :)", NULL);
         printf("Dialog isn't working");
     }
     else
@@ -971,7 +970,7 @@ Dialog::Dialog(std::string path)
         }
 
     }
-    max_stron = ceil(i / 5);
+    max_pages = ceil(i / 5);
     pixels[0] = 600;
     pixels[1] = 630;
     pixels[2] = 660;
@@ -985,25 +984,25 @@ void Dialog::next_page(SDL_Event& e)
     {
         if (e.key.keysym.sym == SDLK_RETURN)
         {
-            if (strona + 1 <= max_stron)
-                strona++;
+            if (page + 1 <= max_pages)
+                page++;
             else
                 view = false;
         }
     }
-    if (nastepna.morethanseconds())
+    if (next.morethanseconds())
     {
         if (to_hide)
             view = false;
 
-        if (strona + 1 <= max_stron && !to_hide)
+        if (page + 1 <= max_pages && !to_hide)
         {
-            strona++;
-            nastepna.start();
+            page++;
+            next.start();
         }
-        else if (strona + 1 > max_stron && !to_hide)
+        else if (page + 1 > max_pages && !to_hide)
         {
-            nastepna.start();
+            next.start();
             to_hide = true;
         }
 
@@ -1013,7 +1012,7 @@ void Dialog::next_page(SDL_Event& e)
 void Dialog::start()
 {
     view = true;
-    nastepna.start();
+    next.start();
 }
 
 
@@ -1022,14 +1021,14 @@ void Dialog::draw()
     if (view)
     {
         back.render(0, 600);
-        int ile = (strona + 1) * 5;
+        int ile = (page + 1) * 5;
         if (ile > i)
         {
             int r = ile - i;
             ile -= r;
         }
         int k = 0;
-        for (int j = strona * 5; j < ile; j++)
+        for (int j = page * 5; j < ile; j++)
         {
             text.loadFromRenderedText(texts[j], white);
             text.render(0, pixels[k]);
@@ -1238,14 +1237,21 @@ Eq::Eq(Player *p)
 {
     show = false;
     if (!eq.loadFromFile("Assets/UIEQ.png"))
-        printf("EQ grafika nie dzia³a");
+    {
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search UI image file. Please reinstall game :)", NULL);
+        printf("EQ UI graphics load failed");
+    }
+        
 
-    nickname.loadFromRenderedText(p->nick,white);
+    nickname.loadFromRenderedText("Nazwa: "+p->nick, white);
+    hp.loadFromRenderedText("Punkty zycia: "+std::to_string(p->health), white);
+    power.loadFromRenderedText("Sila: "+std::to_string(p->strenght), white);
 }
 
 Eq::~Eq()
 {
     eq.free();
+    nickname.free();
 }
 
 void Eq::draw()
@@ -1253,7 +1259,9 @@ void Eq::draw()
     if (show)
     {
         eq.render(0, 0);
-        nickname.render(10, 10);
+        nickname.render(5, 5);
+        hp.render(5, 45);
+        power.render(5, 85);
     }
 }
 
@@ -1273,7 +1281,7 @@ void Eq::check_show(SDL_Event e)
         
 }
 
-void pierwszy(Tilemap* t, Player* p)
+void first(Tilemap* t, Player* p)
 {
     SDL_Event e;
 
@@ -1504,13 +1512,11 @@ void menu(Tilemap* t, Player* p)
 
 void new_game_menu(Tilemap* t, Player* p)
 {
-    std::ofstream plik;
+    int anim = 1;
 
-    int animacja = 1;
+    std::string save_choose = "0";
 
-    std::string ktory_zapis_wybrales = "0";
-
-    std::string ktory_outfit_wybrales = "0";
+    std::string outfit_choose = "0";
 
     bool run = true;
 
@@ -1562,11 +1568,11 @@ void new_game_menu(Tilemap* t, Player* p)
 
     przyciski[8].setPosistion(590, 585);
 
-    Texture outfit, press_enter, zapis, info;
+    Texture outfit, press_enter, save, info;
 
-    outfit.loadFromRenderedText("Wybrales  " + ktory_outfit_wybrales + "  wyglad", white);
+    outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
 
-    zapis.loadFromRenderedText("Wybrales  " + ktory_zapis_wybrales + "  zapis", white);
+    save.loadFromRenderedText("Wybrales  " + save_choose + "  zapis", white);
 
     press_enter.loadFromRenderedText("Podaj nick:", white);
 
@@ -1588,44 +1594,44 @@ void new_game_menu(Tilemap* t, Player* p)
 
             if (przyciski[0].handleEvent(&e) == 1)
             {
-                ktory_outfit_wybrales = "1";
-                outfit.loadFromRenderedText("Wybrales  " + ktory_outfit_wybrales + "  wyglad", white);
+                outfit_choose = "1";
+                outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
             if (przyciski[1].handleEvent(&e) == 1)
             {
-                ktory_outfit_wybrales = "2";
-                outfit.loadFromRenderedText("Wybrales  " + ktory_outfit_wybrales + "  wyglad", white);
+                outfit_choose = "2";
+                outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
             if (przyciski[2].handleEvent(&e) == 1)
             {
-                ktory_outfit_wybrales = "3";
-                outfit.loadFromRenderedText("Wybrales  " + ktory_outfit_wybrales + "  wyglad", white);
+                outfit_choose = "3";
+                outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
             if (przyciski[3].handleEvent(&e) == 1)
             {
-                ktory_outfit_wybrales = "4";
-                outfit.loadFromRenderedText("Wybrales  " + ktory_outfit_wybrales + "  wyglad", white);
+                outfit_choose = "4";
+                outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
             if (przyciski[4].handleEvent(&e) == 1)
             {
-                ktory_zapis_wybrales = "1";
-                zapis.loadFromRenderedText("Wybrales  " + ktory_zapis_wybrales + "  zapis", white);
+                save_choose = "1";
+                save.loadFromRenderedText("Wybrales  " + save_choose + "  zapis", white);
             }
 
             if (przyciski[5].handleEvent(&e) == 1)
             {
-                ktory_zapis_wybrales = "2";
-                zapis.loadFromRenderedText("Wybrales  " + ktory_zapis_wybrales + "  zapis", white);
+                save_choose = "2";
+                save.loadFromRenderedText("Wybrales  " + save_choose + "  zapis", white);
             }
 
             if (przyciski[6].handleEvent(&e) == 1)
             {
-                ktory_zapis_wybrales = "3";
-                zapis.loadFromRenderedText("Wybrales  " + ktory_zapis_wybrales + "  zapis", white);
+                save_choose = "3";
+                save.loadFromRenderedText("Wybrales  " + save_choose + "  zapis", white);
             }
 
             int x, y;
@@ -1647,27 +1653,27 @@ void new_game_menu(Tilemap* t, Player* p)
 
             if (przyciski[7].handleEvent(&e) == 1)
             {
-                if (ktory_outfit_wybrales == "0" && ktory_zapis_wybrales == "0" && (nick.text == "some text" || nick.text.length() == 0))
+                if (outfit_choose == "0" && save_choose == "0" && (nick.text == "some text" || nick.text.length() == 0))
                 {
                     info.loadFromRenderedText("Nie wybrales wygladu, numeru zapisu, ani nazwy gracza zmien to :)", white);
                 }
-                else if (ktory_outfit_wybrales == "0" && ktory_zapis_wybrales == "0")
+                else if (outfit_choose == "0" && save_choose == "0")
                 {
                     info.loadFromRenderedText("Nie wybrales wygladu i numeru zapisu zmien to :)", white);
                 }
-                else if (ktory_outfit_wybrales == "0" && (nick.text == "some text" || nick.text.length() == 0))
+                else if (outfit_choose == "0" && (nick.text == "some text" || nick.text.length() == 0))
                 {
                     info.loadFromRenderedText("Nie wybrales wygladu i nazwy gracza zmien to :)", white);
                 }
-                else if (ktory_zapis_wybrales == "0" && (nick.text == "some text" || nick.text.length() == 0))
+                else if (save_choose == "0" && (nick.text == "some text" || nick.text.length() == 0))
                 {
                     info.loadFromRenderedText("Nie wybrales numeru zapisu i nazwy gracza zmien to :)", white);
                 }
-                else if (ktory_outfit_wybrales == "0")
+                else if (outfit_choose == "0")
                 {
                     info.loadFromRenderedText("Nie wybrales wygladu zmien to :)", white);
                 }
-                else if (ktory_zapis_wybrales == "0")
+                else if (save_choose == "0")
                 {
                     info.loadFromRenderedText("Nie wybrales numeru zapisu zmien to :)", white);
                 }
@@ -1677,8 +1683,8 @@ void new_game_menu(Tilemap* t, Player* p)
                 }
                 else
                 {
-                    p->id = ktory_outfit_wybrales;
-                    p->zapis = ktory_zapis_wybrales;
+                    p->id = outfit_choose;
+                    p->save = save_choose;
                     p->nick = nick.text;
                     run = false;
                 }
@@ -1713,31 +1719,31 @@ void new_game_menu(Tilemap* t, Player* p)
             {
                 new_game_players[i].frame = 0;
 
-                if (animacja <= 4)
+                if (anim <= 4)
                 {
-                    animacja++;
+                    anim++;
                 }
                 else
                 {
-                    animacja = 1;
+                    anim = 1;
                 }
             }
-            if (animacja == 1)
+            if (anim == 1)
             {
                 new_game_players[i].lastx = -1;
                 new_game_players[i].lasty = 0;
             }
-            else if (animacja == 2)
+            else if (anim == 2)
             {
                 new_game_players[i].lastx = 0;
                 new_game_players[i].lasty = -1;
             }
-            else if (animacja == 3)
+            else if (anim == 3)
             {
                 new_game_players[i].lastx = 1;
                 new_game_players[i].lasty = 0;
             }
-            else if (animacja == 4)
+            else if (anim == 4)
             {
                 new_game_players[i].lastx = 0;
                 new_game_players[i].lasty = 1;
@@ -1747,7 +1753,7 @@ void new_game_menu(Tilemap* t, Player* p)
 
         outfit.render(515, 10);
 
-        zapis.render(515, 167);
+        save.render(515, 167);
 
         press_enter.render(570, 300);
 
@@ -1763,7 +1769,7 @@ void load_game_menu(Tilemap* t, Player* p)
 {
     std::fstream plik;
 
-    std::string jaki_plik = "0";
+    std::string file_number = "0";
 
     std::string dane;
 
@@ -1797,7 +1803,7 @@ void load_game_menu(Tilemap* t, Player* p)
 
     Texture info;
 
-    info.loadFromRenderedText("Wybrales  " + jaki_plik, white);
+    info.loadFromRenderedText("Wybrales  " + file_number, white);
 
     while (run)
     {
@@ -1812,20 +1818,20 @@ void load_game_menu(Tilemap* t, Player* p)
 
             if (one.handleEvent(&e) == 1)
             {
-                jaki_plik = "1";
-                info.loadFromRenderedText("Wybrales  " + jaki_plik, white);
+                file_number = "1";
+                info.loadFromRenderedText("Wybrales  " + file_number, white);
             }
 
             if (two.handleEvent(&e) == 1)
             {
-                jaki_plik = "2";
-                info.loadFromRenderedText("Wybrales  " + jaki_plik, white);
+                file_number = "2";
+                info.loadFromRenderedText("Wybrales  " + file_number, white);
             }
 
             if (three.handleEvent(&e) == 1)
             {
-                jaki_plik = "3";
-                info.loadFromRenderedText("Wybrales  " + jaki_plik, white);
+                file_number = "3";
+                info.loadFromRenderedText("Wybrales  " + file_number, white);
             }
 
             if (ret.handleEvent(&e) == 1)
@@ -1836,14 +1842,14 @@ void load_game_menu(Tilemap* t, Player* p)
 
             if (confirm.handleEvent(&e) == 1)
             {
-                if (jaki_plik == "0")
+                if (file_number == "0")
                 {
                     info.loadFromRenderedText("Nie wybrales zadnego pliku", white);
                 }
                 else
                 {
 
-                    plik.open("Assets/Saves/" + jaki_plik + ".txt", std::ios::in);
+                    plik.open("Assets/Saves/" + file_number + ".txt", std::ios::in);
 
                     int i = 1;
 
@@ -1857,20 +1863,27 @@ void load_game_menu(Tilemap* t, Player* p)
 
                     while (std::getline(plik, dane))
                     {
-                        if (i == 1)
+                        switch (i)
                         {
+                        case 1:
                             p->nick = dane;
-                        }
-                        else if (i == 2)
-                        {
+                            break;
+                        case 2:
                             p->id = dane;
+                            break;
+                        case 3:
+                            p->health = stoi(dane);
+                            break;
+                        case 4:
+                            p->strenght = stoi(dane);
+                            break;
                         }
                         i++;
                     }
 
-                    p->zapis = jaki_plik;
+                    p->save = file_number;
 
-                    p->mapa = 1;
+                    p->map = 1;
                     run = false;
                 }
 
@@ -1952,5 +1965,3 @@ void about_menu(Tilemap* t, Player* p)
 
     background.free();
 }
-
-
