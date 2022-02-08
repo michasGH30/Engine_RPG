@@ -248,6 +248,17 @@ public:
     ~Eq();
 };
 
+class Fight
+{
+public:
+    Fight(Tilemap* t, Player* p);
+    bool fight(Player* p, NPC* npc);
+
+private:
+    Texture back;
+    Texture ui;
+};
+
 bool checkCollision(SDL_Rect& a, SDL_Rect& b);
 bool init();
 void close(Tilemap* t, Player* p);

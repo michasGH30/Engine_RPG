@@ -1155,8 +1155,8 @@ Button::Button(std::string pathin, std::string pathout)
 {
     mPosition.x = 0;
     mPosition.y = 0;
-    BUTTON_WIDTH = 100;
-    BUTTON_HEIGHT = 50;
+    BUTTON_WIDTH = 200;
+    BUTTON_HEIGHT = 100;
     if (mousein.loadFromFile(pathin) == false || mouseuot.loadFromFile(pathout) == false)
     {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search someone of button texture. Please reinstall game :)", NULL);
@@ -1281,6 +1281,20 @@ void Eq::check_show(SDL_Event e)
         
 }
 
+Fight::Fight(Tilemap* t, Player* p)
+{
+    if (!back.loadFromFile("Assets/fight/fight_back.png"))
+    {
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search fight window background texture file. Please reinstall game :)", NULL);
+        close(t, p);
+    }
+    if (!ui.loadFromFile("Assets/fight/fight_ui.png"))
+    {
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search fight window background texture file. Please reinstall game :)", NULL);
+        close(t, p);
+    }
+}
+
 void first(Tilemap* t, Player* p)
 {
     SDL_Event e;
@@ -1372,17 +1386,17 @@ void play_menu(Tilemap* t, Player* p)
 
     background.loadFromFile("Assets/Gui/blink_bg.png");
 
-    Button new_game("Assets/Gui/new_game_dark.png", "Assets/Gui/new_game_light.png");
+    Button new_game("Assets/Gui/new_game_out.png", "Assets/Gui/new_game_in.png");
 
-    new_game.setPosistion(590, 100);
+    new_game.setPosistion(540, 100);
 
-    Button load_game("Assets/Gui/load_game_dark.png", "Assets/Gui/load_game_light.png");
+    Button load_game("Assets/Gui/load_game_out.png", "Assets/Gui/load_game_in.png");
 
-    load_game.setPosistion(590, 250);
+    load_game.setPosistion(540, 250);
 
-    Button ret("Assets/Gui/return_dark.png", "Assets/Gui/return_light.png");
+    Button ret("Assets/Gui/return_out.png", "Assets/Gui/return_in.png");
 
-    ret.setPosistion(590, 500);
+    ret.setPosistion(540, 500);
 
     bool run = true;
 
@@ -1447,17 +1461,17 @@ void menu(Tilemap* t, Player* p)
 
     background.loadFromFile("Assets/Gui/main_menu.png");
 
-    Button play("Assets/Gui/play_dark.png", "Assets/Gui/play_light.png");
+    Button play("Assets/Gui/play_out.png", "Assets/Gui/play_in.png");
 
-    Button about("Assets/Gui/about_dark.png", "Assets/Gui/about_light.png");
+    Button about("Assets/Gui/about_out.png", "Assets/Gui/about_in.png");
 
-    Button quit("Assets/Gui/quit_dark.png", "Assets/Gui/quit_light.png");
+    Button quit("Assets/Gui/quit_out.png", "Assets/Gui/quit_in.png");
 
-    play.setPosistion(590, 200);
+    play.setPosistion(540, 200);
 
-    about.setPosistion(590, 350);
+    about.setPosistion(540, 350);
 
-    quit.setPosistion(590, 500);
+    quit.setPosistion(540, 500);
 
     while (run)
     {
@@ -1543,15 +1557,15 @@ void new_game_menu(Tilemap* t, Player* p)
     }
 
     Button przyciski[9] =
-    { Button("Assets/Gui/confirm_dark.png","Assets/Gui/confirm_light.png"),
-     Button("Assets/Gui/confirm_dark.png","Assets/Gui/confirm_light.png"),
-     Button("Assets/Gui/confirm_dark.png","Assets/Gui/confirm_light.png"),
-     Button("Assets/Gui/confirm_dark.png","Assets/Gui/confirm_light.png"),
-     Button("Assets/Gui/1_dark.png","Assets/Gui/1_light.png"),
-     Button("Assets/Gui/2_dark.png","Assets/Gui/2_light.png"),
-     Button("Assets/Gui/3_dark.png","Assets/Gui/3_light.png"),
-     Button("Assets/Gui/play_dark.png","Assets/Gui/play_light.png"),
-     Button("Assets/Gui/return_dark.png","Assets/Gui/return_light.png")
+    { Button("Assets/Gui/confirm_out.png","Assets/Gui/confirm_in.png"),
+     Button("Assets/Gui/confirm_out.png","Assets/Gui/confirm_in.png"),
+     Button("Assets/Gui/confirm_out.png","Assets/Gui/confirm_in.png"),
+     Button("Assets/Gui/confirm_out.png","Assets/Gui/confirm_in.png"),
+     Button("Assets/Gui/1_out.png","Assets/Gui/1_in.png"),
+     Button("Assets/Gui/2_out.png","Assets/Gui/2_in.png"),
+     Button("Assets/Gui/3_out.png","Assets/Gui/3_in.png"),
+     Button("Assets/Gui/play_out.png","Assets/Gui/play_in.png"),
+     Button("Assets/Gui/return_out.png","Assets/Gui/return_in.png")
     };
 
     przyciski[0].setPosistion(270, 95);
@@ -1561,12 +1575,12 @@ void new_game_menu(Tilemap* t, Player* p)
 
 
     przyciski[4].setPosistion(270, 220);
-    przyciski[5].setPosistion(590, 220);
+    przyciski[5].setPosistion(540, 220);
     przyciski[6].setPosistion(910, 220);
 
-    przyciski[7].setPosistion(590, 465);
+    przyciski[7].setPosistion(540, 465);
 
-    przyciski[8].setPosistion(590, 585);
+    przyciski[8].setPosistion(540, 585);
 
     Texture outfit, press_enter, save, info;
 
@@ -1781,25 +1795,25 @@ void load_game_menu(Tilemap* t, Player* p)
 
     background.loadFromFile("Assets/Gui/blink_bg.png");
 
-    Button one("Assets/Gui/1_dark.png", "Assets/Gui/1_light.png");
+    Button one("Assets/Gui/1_out.png", "Assets/Gui/1_in.png");
 
-    one.setPosistion(270, 100);
+    one.setPosistion(240, 100);
 
-    Button two("Assets/Gui/2_dark.png", "Assets/Gui/2_light.png");
+    Button two("Assets/Gui/2_out.png", "Assets/Gui/2_in.png");
 
-    two.setPosistion(590, 100);
+    two.setPosistion(540, 100);
 
-    Button three("Assets/Gui/3_dark.png", "Assets/Gui/3_light.png");
+    Button three("Assets/Gui/3_out.png", "Assets/Gui/3_in.png");
 
-    three.setPosistion(910, 100);
+    three.setPosistion(840, 100);
 
-    Button confirm("Assets/Gui/confirm_dark.png", "Assets/Gui/confirm_light.png");
+    Button confirm("Assets/Gui/confirm_out.png", "Assets/Gui/confirm_in.png");
 
-    confirm.setPosistion(590, 300);
+    confirm.setPosistion(540, 300);
 
-    Button ret("Assets/Gui/return_dark.png", "Assets/Gui/return_light.png");
+    Button ret("Assets/Gui/return_out.png", "Assets/Gui/return_in.png");
 
-    ret.setPosistion(590, 500);
+    ret.setPosistion(540, 500);
 
     Texture info;
 
@@ -1924,13 +1938,13 @@ void about_menu(Tilemap* t, Player* p)
 
     background.loadFromFile("Assets/Gui/about_bg.png");
 
-    Button ret("Assets/Gui/return_dark.png", "Assets/Gui/return_light.png");
+    Button ret("Assets/Gui/return_out.png", "Assets/Gui/return_in.png");
 
     Texture text;
 
     text.loadFromRenderedText("To fakt nie opinia", white);
 
-    ret.setPosistion(590, 700);
+    ret.setPosistion(540, 650);
 
     while (run)
     {
@@ -1965,3 +1979,5 @@ void about_menu(Tilemap* t, Player* p)
 
     background.free();
 }
+
+
