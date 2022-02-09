@@ -252,7 +252,7 @@ class Fight
 {
 public:
     Fight(Tilemap* t, Player* p);
-    bool fight(Player* p, NPC* npc);
+    bool fight(Player* p, NPC* npc, Tilemap* t);
 
 private:
     Texture back;

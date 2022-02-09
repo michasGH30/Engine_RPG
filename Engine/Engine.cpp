@@ -1295,6 +1295,45 @@ Fight::Fight(Tilemap* t, Player* p)
     }
 }
 
+bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
+{
+    SDL_Event e;
+
+    p->Collider.x = p->Collider.y = 40; 
+
+    bool run = true;
+
+    while (run)
+    {
+        while (SDL_PollEvent(&e) != 0)
+        {
+            if (e.type == SDL_QUIT)
+            {
+                run = false;
+                close(t, p);
+                exit(0);
+            }
+            p->handleEvents(e);
+
+        }
+
+        p->move(npc->Collider);
+
+        SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        SDL_RenderClear(gRenderer);
+
+        t->show(0);
+        t->show(1);
+
+        p->render();
+
+        npc->render();
+
+        SDL_RenderPresent(gRenderer);
+
+    }
+}
 void first(Tilemap* t, Player* p)
 {
     SDL_Event e;
@@ -1540,7 +1579,7 @@ void new_game_menu(Tilemap* t, Player* p)
 
     background.loadFromFile("Assets/Gui/blink_bg.png");
 
-    Player new_game_players[4] = { Player(305,50),Player(529,50),Player(727,50),Player(948,50) };//200 416 632 848
+    Player new_game_players[4] = { Player(284,60),Player(514,60),Player(744,60),Player(974,60) };//200 416 632 848
 
     new_game_players[0].id = "1";
 
@@ -1568,19 +1607,19 @@ void new_game_menu(Tilemap* t, Player* p)
      Button("Assets/Gui/return_out.png","Assets/Gui/return_in.png")
     };
 
-    przyciski[0].setPosistion(270, 95);
-    przyciski[1].setPosistion(490, 95);
-    przyciski[2].setPosistion(690, 95);
-    przyciski[3].setPosistion(910, 95);
+    przyciski[0].setPosistion(195, 105);
+    przyciski[1].setPosistion(425, 105);
+    przyciski[2].setPosistion(655, 105);
+    przyciski[3].setPosistion(885, 105);
 
 
-    przyciski[4].setPosistion(270, 220);
-    przyciski[5].setPosistion(540, 220);
-    przyciski[6].setPosistion(910, 220);
+    przyciski[4].setPosistion(300, 230);
+    przyciski[5].setPosistion(540, 230);
+    przyciski[6].setPosistion(780, 230);
 
-    przyciski[7].setPosistion(540, 465);
+    przyciski[7].setPosistion(540, 520);
 
-    przyciski[8].setPosistion(540, 585);
+    przyciski[8].setPosistion(540, 645);
 
     Texture outfit, press_enter, save, info;
 
@@ -1592,7 +1631,7 @@ void new_game_menu(Tilemap* t, Player* p)
 
     info.loadFromRenderedText(" ", white);
 
-    Input nick(565, 350);
+    Input nick(550, 450);
 
     while (run)
     {
@@ -1767,9 +1806,9 @@ void new_game_menu(Tilemap* t, Player* p)
 
         outfit.render(515, 10);
 
-        save.render(515, 167);
+        save.render(515, 340);
 
-        press_enter.render(570, 300);
+        press_enter.render(540, 400);
 
         info.render(300, 500);
 
