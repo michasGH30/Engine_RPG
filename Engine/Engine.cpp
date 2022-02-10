@@ -1299,7 +1299,41 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
 {
     SDL_Event e;
 
-    p->Collider.x = p->Collider.y = 40; 
+    Texture bg;
+
+    bg.loadFromFile("Assets/fight/fight_back.png");
+
+    Texture ui;
+
+    ui.loadFromFile("Assets/fight/fight_ui.png");
+
+    Texture hp, str;
+    hp.loadFromRenderedText("Twoje punkty zycia: " + std::to_string(p->health), white);
+    str.loadFromRenderedText("Twoja sila: " + std::to_string(p->strenght), white);
+
+    p->Collider.x = 600;
+    p->Collider.y = 400;
+    p->ismoving = false;
+    p->lastx = 0;
+    p->lasty = 1;
+    
+    npc->Collider.x = 600;
+    npc->Collider.y = 200;
+
+    Button buttons[4] =
+    { 
+     Button("Assets/fight/fight_attack_out.png","Assets/fight/fight_attack_in.png"),
+     Button("Assets/fight/fight_cast_out.png","Assets/fight/fight_cast_in.png"),
+     Button("Assets/fight/fight_back_out.png","Assets/fight/fight_back_in.png"),
+     Button("Assets/fight/fight_fireball_out.png","Assets/fight/fight_fireball_in.png")
+    };
+
+    buttons[0].setPosistion(0, 468);
+    buttons[1].setPosistion(0, 568);
+    buttons[2].setPosistion(0, 668);
+    buttons[3].setPosistion(0, 468);
+
+    bool cast_visible = false;
 
     bool run = true;
 
@@ -1313,36 +1347,60 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
                 close(t, p);
                 exit(0);
             }
-            p->handleEvents(e);
-
+            buttons[2].handleEvent(&e);
+            if (!cast_visible)
+            {
+                buttons[0].handleEvent(&e);
+                if (buttons[1].handleEvent(&e) == 1)
+                    cast_visible = true;
+            }
+            else
+            {
+                if (buttons[3].handleEvent(&e) == 1)
+                    cast_visible = false;
+            }
         }
-
-        p->move(npc->Collider);
 
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
         SDL_RenderClear(gRenderer);
 
-        t->show(0);
-        t->show(1);
+        bg.render(0, 0);
+
+        ui.render(0, 468);
+
+        hp.render(210, 480);
+        str.render(210, 520);
+
+        buttons[2].render();
+        if (!cast_visible)
+        {
+            buttons[0].render();
+            buttons[1].render();
+        }
+        else
+        {
+            buttons[3].render();
+        }
 
         p->render();
 
         npc->render();
 
         SDL_RenderPresent(gRenderer);
-
     }
 }
 void first(Tilemap* t, Player* p)
 {
+    p->Collider.x = p->Collider.y = 40;
+    NPC* npc = new Start_men(1000, 250);
+    Fight f(t, p);
+    f.fight(p, npc, t);
     SDL_Event e;
 
     Dialog xd("prolog.txt");
 
     xd.start();
-
-    p->Collider.x = p->Collider.y = 40;
 
     bool run = true;
 
@@ -1350,8 +1408,6 @@ void first(Tilemap* t, Player* p)
 
     t->loadFromfile("Assets/m1.txt",0);
     t->loadFromfile("Assets/m1_coll.txt",1);
-
-    NPC* npc = new Start_men(1000, 250);
 
     Animation a(1.5f, 's');
     Animation b(1.0f, 'w');
@@ -1595,7 +1651,7 @@ void new_game_menu(Tilemap* t, Player* p)
         new_game_players[i].ismoving = true;
     }
 
-    Button przyciski[9] =
+    Button buttons[9] =
     { Button("Assets/Gui/confirm_out.png","Assets/Gui/confirm_in.png"),
      Button("Assets/Gui/confirm_out.png","Assets/Gui/confirm_in.png"),
      Button("Assets/Gui/confirm_out.png","Assets/Gui/confirm_in.png"),
@@ -1607,19 +1663,19 @@ void new_game_menu(Tilemap* t, Player* p)
      Button("Assets/Gui/return_out.png","Assets/Gui/return_in.png")
     };
 
-    przyciski[0].setPosistion(195, 105);
-    przyciski[1].setPosistion(425, 105);
-    przyciski[2].setPosistion(655, 105);
-    przyciski[3].setPosistion(885, 105);
+    buttons[0].setPosistion(195, 105);
+    buttons[1].setPosistion(425, 105);
+    buttons[2].setPosistion(655, 105);
+    buttons[3].setPosistion(885, 105);
 
 
-    przyciski[4].setPosistion(300, 230);
-    przyciski[5].setPosistion(540, 230);
-    przyciski[6].setPosistion(780, 230);
+    buttons[4].setPosistion(300, 230);
+    buttons[5].setPosistion(540, 230);
+    buttons[6].setPosistion(780, 230);
 
-    przyciski[7].setPosistion(540, 520);
+    buttons[7].setPosistion(540, 520);
 
-    przyciski[8].setPosistion(540, 645);
+    buttons[8].setPosistion(540, 645);
 
     Texture outfit, press_enter, save, info;
 
@@ -1645,43 +1701,43 @@ void new_game_menu(Tilemap* t, Player* p)
                 exit(0);
             }
 
-            if (przyciski[0].handleEvent(&e) == 1)
+            if (buttons[0].handleEvent(&e) == 1)
             {
                 outfit_choose = "1";
                 outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
-            if (przyciski[1].handleEvent(&e) == 1)
+            if (buttons[1].handleEvent(&e) == 1)
             {
                 outfit_choose = "2";
                 outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
-            if (przyciski[2].handleEvent(&e) == 1)
+            if (buttons[2].handleEvent(&e) == 1)
             {
                 outfit_choose = "3";
                 outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
-            if (przyciski[3].handleEvent(&e) == 1)
+            if (buttons[3].handleEvent(&e) == 1)
             {
                 outfit_choose = "4";
                 outfit.loadFromRenderedText("Wybrales  " + outfit_choose + "  wyglad", white);
             }
 
-            if (przyciski[4].handleEvent(&e) == 1)
+            if (buttons[4].handleEvent(&e) == 1)
             {
                 save_choose = "1";
                 save.loadFromRenderedText("Wybrales  " + save_choose + "  zapis", white);
             }
 
-            if (przyciski[5].handleEvent(&e) == 1)
+            if (buttons[5].handleEvent(&e) == 1)
             {
                 save_choose = "2";
                 save.loadFromRenderedText("Wybrales  " + save_choose + "  zapis", white);
             }
 
-            if (przyciski[6].handleEvent(&e) == 1)
+            if (buttons[6].handleEvent(&e) == 1)
             {
                 save_choose = "3";
                 save.loadFromRenderedText("Wybrales  " + save_choose + "  zapis", white);
@@ -1704,7 +1760,7 @@ void new_game_menu(Tilemap* t, Player* p)
 
             nick.inputtext(e);
 
-            if (przyciski[7].handleEvent(&e) == 1)
+            if (buttons[7].handleEvent(&e) == 1)
             {
                 if (outfit_choose == "0" && save_choose == "0" && (nick.text == "some text" || nick.text.length() == 0))
                 {
@@ -1743,7 +1799,7 @@ void new_game_menu(Tilemap* t, Player* p)
                 }
             }
 
-            if (przyciski[8].handleEvent(&e) == 1)
+            if (buttons[8].handleEvent(&e) == 1)
             {
                 run = false;
                 play_menu(t,p);
@@ -1760,7 +1816,7 @@ void new_game_menu(Tilemap* t, Player* p)
         nick.render();
 
         for (int i = 0; i < 9; i++)
-            przyciski[i].render();
+            buttons[i].render();
 
         for (int i = 0; i < 4; i++)
         {
