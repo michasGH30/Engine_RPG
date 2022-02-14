@@ -130,6 +130,8 @@ public:
     SDL_Rect Collider, up[3], down[3], left[3], right[3];
     Texture npc_texture;
     int frame;
+    int hp;
+    int strenght;
 };
 
 class Start_men : public NPC
@@ -183,8 +185,9 @@ public:
 
     void start();
 
-
     void draw();
+
+    bool active_dialog();
 
 };
 class Input

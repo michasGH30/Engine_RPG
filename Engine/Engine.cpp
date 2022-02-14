@@ -703,70 +703,72 @@ Player::~Player()
 
 Start_men::Start_men(int x, int y)
 {
-    int w = 24;
+    hp = 50;
+    strenght = 1;
+    int w = 32;
     int h = 32;
     Collider.x = x;
     Collider.y = y;
-    Collider.w = 24;
-    Collider.h = 32;
+    Collider.w = w;
+    Collider.h = h;
 
     down[0].x = 0;
-    down[0].y = 64;
+    down[0].y = 0;
     down[0].w = w;
     down[0].h = h;
 
-    down[1].x = 24;
-    down[1].y = 64;
+    down[1].x = 32;
+    down[1].y = 0;
     down[1].w = w;
     down[1].h = h;
 
-    down[2].x = 48;
-    down[2].y = 64;
+    down[2].x = 64;
+    down[2].y = 0;
     down[2].w = w;
     down[2].h = h;
 
     left[0].x = 0;
-    left[0].y = 96;
+    left[0].y = 32;
     left[0].w = w;
     left[0].h = h;
 
-    left[1].x = 24;
-    left[1].y = 96;
+    left[1].x = 32;
+    left[1].y = 32;
     left[1].w = w;
     left[1].h = h;
 
-    left[2].x = 48;
-    left[2].y = 96;
+    left[2].x = 64;
+    left[2].y = 32;
     left[2].w = w;
     left[2].h = h;
 
     right[0].x = 0;
-    right[0].y = 32;
+    right[0].y = 64;
     right[0].w = w;
     right[0].h = h;
 
-    right[1].x = 24;
-    right[1].y = 32;
+    right[1].x = 32;
+    right[1].y = 64;
     right[1].w = w;
     right[1].h = h;
 
-    right[2].x = 48;
-    right[2].y = 32;
+    right[2].x = 64;
+    right[2].y = 64;
     right[2].w = w;
     right[2].h = h;
 
     up[0].x = 0;
-    up[0].y = 24;
+    up[0].y = 96;
     up[0].w = w;
     up[0].h = h;
 
-    up[1].x = 24;
-    up[1].y = 0;
+    up[1].x = 32;
+    up[1].y = 96;
     up[1].w = w;
     up[1].h = h;
 
-    up[2].x = 48;
-    up[2].y = 0;
+    up[2].x = 64;
+    up[2].y = 96;
     up[2].w = w;
     up[2].h = h;
 
@@ -784,7 +786,7 @@ Start_men::Start_men(int x, int y)
 bool Start_men::load()
 {
     //mandar.png
-    if (npc_texture.loadFromFile("Assets/oldman/oldman.png") == false)
+    if (npc_texture.loadFromFile("Assets/oldman/old.png") == false)
     {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search NPC texture file. Please reinstall game :)", NULL);
         printf("Failed to load old man texture\n");
@@ -1037,6 +1039,11 @@ void Dialog::draw()
     }
 }
 
+bool Dialog::active_dialog()
+{
+    return view;
+}
+
 Input::Input(int x, int y)
 {
     Collider.x = x;
@@ -1236,7 +1243,7 @@ Button::~Button()
 Eq::Eq(Player *p)
 {
     show = false;
-    if (!eq.loadFromFile("Assets/UIEQ.png"))
+    if (!eq.loadFromFile("Assets/Gui/UIEQ.png"))
     {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Missing file", "Cannot search UI image file. Please reinstall game :)", NULL);
         printf("EQ UI graphics load failed");
@@ -1252,6 +1259,8 @@ Eq::~Eq()
 {
     eq.free();
     nickname.free();
+    hp.free();
+    power.free();
 }
 
 void Eq::draw()
@@ -1307,9 +1316,11 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
 
     ui.loadFromFile("Assets/fight/fight_ui.png");
 
-    Texture hp, str;
+    Texture hp, str, hp_enemy, str_enemy;
     hp.loadFromRenderedText("Twoje punkty zycia: " + std::to_string(p->health), white);
     str.loadFromRenderedText("Twoja sila: " + std::to_string(p->strenght), white);
+    str_enemy.loadFromRenderedText("Sila przeciwnika: " + std::to_string(npc->strenght), white);
+    hp_enemy.loadFromRenderedText("Twoja sila: " + std::to_string(npc->hp), white);
 
     p->Collider.x = 600;
     p->Collider.y = 400;
@@ -1337,7 +1348,7 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
 
     bool run = true;
 
-    while (run)
+    while (run && npc->hp>0 && p->health>0)
     {
         while (SDL_PollEvent(&e) != 0)
         {
@@ -1350,7 +1361,12 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
             buttons[2].handleEvent(&e);
             if (!cast_visible)
             {
-                buttons[0].handleEvent(&e);
+                if (buttons[0].handleEvent(&e) == 1)
+                {
+                    npc->hp -= p->strenght;
+                    p->health -= npc->strenght;
+                }
+                    
                 if (buttons[1].handleEvent(&e) == 1)
                     cast_visible = true;
             }
@@ -1360,6 +1376,11 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
                     cast_visible = false;
             }
         }
+
+        hp.loadFromRenderedText("Twoje punkty zycia: " + std::to_string(p->health), white);
+        str.loadFromRenderedText("Twoja sila: " + std::to_string(p->strenght), white);
+        str_enemy.loadFromRenderedText("Sila przeciwnika: " + std::to_string(npc->strenght), white);
+        hp_enemy.loadFromRenderedText("Twoja sila: " + std::to_string(npc->hp), white);
 
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
@@ -1371,6 +1392,8 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
 
         hp.render(210, 480);
         str.render(210, 520);
+        str_enemy.render(210, 700);
+        hp_enemy.render(210, 650);
 
         buttons[2].render();
         if (!cast_visible)
@@ -1389,13 +1412,17 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
 
         SDL_RenderPresent(gRenderer);
     }
+
+    if (npc->hp <= 0)
+        return true;
+    else if (p->health <= 0)
+        return false;
 }
 void first(Tilemap* t, Player* p)
 {
     p->Collider.x = p->Collider.y = 40;
     NPC* npc = new Start_men(1000, 250);
     Fight f(t, p);
-    f.fight(p, npc, t);
     SDL_Event e;
 
     Dialog xd("prolog.txt");
@@ -1416,6 +1443,8 @@ void first(Tilemap* t, Player* p)
 
     while (run)
     {
+        if (xd.active_dialog())
+            p->keyboard_active = false;
         while (SDL_PollEvent(&e) != 0)
         {
             if (e.type == SDL_QUIT)
@@ -1431,6 +1460,9 @@ void first(Tilemap* t, Player* p)
             eq.check_show(e);
 
         }
+
+        if(checkCollision(p->Collider, npc->Collider))
+            f.fight(p, npc, t);
 
         for (int i = 0; i < 40; i++)
         {

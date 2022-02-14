@@ -4,3 +4,4 @@ https://pipoya.itch.io/pipoya-rpg-tileset-32x32
 http://untamed.wild-refuge.net/rmxpresources.php?characters
 https://www.fontsquirrel.com/fonts/aleo
 https://www.imagefu.com/create/button
+https://opengameart.org/content/32x32-rpg-character-sprites
