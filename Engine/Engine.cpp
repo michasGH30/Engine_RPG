@@ -1316,11 +1316,12 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
 
     ui.loadFromFile("Assets/fight/fight_ui.png");
 
-    Texture hp, str, hp_enemy, str_enemy;
+    Texture hp, str, hp_enemy, str_enemy, round;
     hp.loadFromRenderedText("Twoje punkty zycia: " + std::to_string(p->health), white);
     str.loadFromRenderedText("Twoja sila: " + std::to_string(p->strenght), white);
     str_enemy.loadFromRenderedText("Sila przeciwnika: " + std::to_string(npc->strenght), white);
     hp_enemy.loadFromRenderedText("Twoja sila: " + std::to_string(npc->hp), white);
+    round.loadFromRenderedText("Twoj ruch",white);
 
     p->Collider.x = 600;
     p->Collider.y = 400;
@@ -1348,6 +1349,11 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
 
     bool run = true;
 
+    Timer ani;
+    ani.set_seconds(1.0f);
+
+    bool your_round_active = true;
+
     while (run && npc->hp>0 && p->health>0)
     {
         while (SDL_PollEvent(&e) != 0)
@@ -1363,7 +1369,11 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
             {
                 if (buttons[0].handleEvent(&e) == 1)
                 {
+                    your_round_active = false;
                     npc->hp -= p->strenght;
+                    round.loadFromRenderedText("Przeciwnik uderza za: " + std::to_string(npc->strenght),white);
+                    npc->Collider.y = 250;
+                    ani.start();
                     p->health -= npc->strenght;
                 }
                     
@@ -1376,11 +1386,19 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
                     cast_visible = false;
             }
         }
+        if (ani.morethanseconds())
+        {
+            round.loadFromRenderedText("Twoj ruch", white);
+            your_round_active = true;
+        }
 
+        if (your_round_active)
+            npc->Collider.y=200 ;
+            
         hp.loadFromRenderedText("Twoje punkty zycia: " + std::to_string(p->health), white);
         str.loadFromRenderedText("Twoja sila: " + std::to_string(p->strenght), white);
         str_enemy.loadFromRenderedText("Sila przeciwnika: " + std::to_string(npc->strenght), white);
-        hp_enemy.loadFromRenderedText("Twoja sila: " + std::to_string(npc->hp), white);
+        hp_enemy.loadFromRenderedText("Punty zycia przeciwnika: " + std::to_string(npc->hp), white);
 
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
@@ -1394,6 +1412,7 @@ bool Fight::fight(Player* p, NPC* npc, Tilemap* t)
         str.render(210, 520);
         str_enemy.render(210, 700);
         hp_enemy.render(210, 650);
+        round.render(800, 480);
 
         buttons[2].render();
         if (!cast_visible)
@@ -1440,6 +1459,8 @@ void first(Tilemap* t, Player* p)
     Animation b(1.0f, 'w');
 
     Eq eq(p);
+
+    f.fight(p, npc, t);
 
     while (run)
     {
